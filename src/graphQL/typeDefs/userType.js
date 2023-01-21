@@ -7,8 +7,18 @@ const schema = buildSchema(`
   }
   
   input UserInput {
-    email: String
-    password: String
+    email: String!
+    password: String!
+  }
+  
+  type DuplicatedUser {
+    message: String
+  }
+  
+  type RegisteredUser {
+    user: User
+    token: String
+    message: String
   }
 
   type Query {
@@ -17,10 +27,12 @@ const schema = buildSchema(`
   }
 
   type Mutation {
-    createUser(input: UserInput): User
-    registerUser(input: UserInput): User
+    createUser(input: UserInput): UserResult
+    registerUser(input: UserInput): UserResult
     loginUser(input: UserInput): User
   }
+  
+   union UserResult = RegisteredUser | DuplicatedUser
 `);
 
 export default schema
