@@ -4,6 +4,7 @@ const schema = buildSchema(`
   type User {
     email: String
     password: String
+    roles: [String]
   }
   
   input UserInput {
@@ -15,8 +16,16 @@ const schema = buildSchema(`
     message: String
   }
   
-  type RegisteredUser {
-    user: User
+  type EmptyUser {
+    message: String
+  }
+  
+  type UnexpectedError {
+    message: String
+  }
+  
+  type AuthUserData {
+    roles: [String]
     token: String
     message: String
   }
@@ -28,11 +37,10 @@ const schema = buildSchema(`
 
   type Mutation {
     createUser(input: UserInput): UserResult
-    registerUser(input: UserInput): UserResult
-    loginUser(input: UserInput): User
+    loginUser(input: UserInput): UserResult
   }
   
-   union UserResult = RegisteredUser | DuplicatedUser
+   union UserResult = AuthUserData | DuplicatedUser | UnexpectedError | EmptyUser
 `);
 
 export default schema

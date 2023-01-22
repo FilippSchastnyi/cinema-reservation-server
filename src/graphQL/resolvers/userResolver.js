@@ -1,36 +1,52 @@
 import * as dotenv from 'dotenv'
-
 dotenv.config()
-import UserSchema from "../../models/UserSchema.js";
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
+import UserModel from "../../models/UserModel.js";
 
-async function isEmailDuplicated(email) {
-  return await UserSchema.countDocuments({email}) > 0
-}
-
-async function generateToken(payload) {
+async function generateToken({id, roles}) {
+  const payload = {id, roles}
   return await jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '24h'});
 }
 
 const userResolver = {
   Query: {
     async getAllUsers() {
-      return UserSchema.find();
+      return UserModel.find();
     },
     async getUser(_, {id}) {
-      return UserSchema.findById(id);
+      return UserModel.findById(id);
     },
   },
   Mutation: {
-    async createUser(_, {input}) {
-      return UserSchema.create(input);
+    async loginUser(_, {input}) {
+      const {email, password} = input
+      const user = await UserModel.findOne({email})
+      if (!user){
+        return {
+          __typename:'EmptyUser',
+          message: `User with ${email} doesn't exist`
+        }
+      }
+      const isPasswordMatch = await bcrypt.compare(password, user.password)
+      if (!isPasswordMatch){
+        return {
+          __typename: "AccessDenied",
+          message: "Incorrect password"
+        }
+      }
+      const token = generateToken({id: user._id, roles: user.roles})
+      return {
+        __typename: "AuthUserData",
+        message: "Success",
+        roles: user.roles,
+        token
+      }
     },
-
-    async registerUser(_, {input}) {
+    async createUser(_, {input}) {
       const {email, password} = input
 
-      if (await isEmailDuplicated(email)) {
+      if (await UserModel.findOne({email})) {
         return {
           __typename: 'DuplicatedUser',
           message: 'Email is duplicated',
@@ -38,30 +54,24 @@ const userResolver = {
       }
 
       const hashedPassword = await bcrypt.hash(password, 5).then(result => result)
-      const newUserData = {email, hashedPassword}
-      const token = await generateToken(newUserData)
-      UserSchema.create(newUserData); //::TODO
-      return {
-        __typename: "RegisteredUser",
-        message: "User has been registered",
-        user: {
-          email,
-          password: hashedPassword,
-        },
-        token
-      }
+      const roles = ["USER"]
+      const newUser = await UserModel.create({email, password: hashedPassword, roles})
+        .then(data => {
+          const token = generateToken({id: data._id, roles})
+          return {
+            __typename: "AuthUserData",
+            message: "User has been registered",
+            roles,
+            token
+          }
+        }, () => {
+          return {
+            __typename: "UnexpectedError",
+            message: "User hasn't been saved",
+          }
+        })
+      return newUser
     },
-
-    async loginUser(_, {input}) {
-      // if exist?
-      // error if not
-      // if entered pass match the encrypted
-      // error if not
-
-      // create new Token
-
-      // update token
-    }
   },
 }
 
