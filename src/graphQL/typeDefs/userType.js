@@ -1,9 +1,10 @@
 import {buildSchema} from 'graphql'
 
 const schema = buildSchema(`
-  type User {
+  type UserData {
     email: String
-    password: String
+    user_id: String
+    message: String
     roles: [String]
   }
   
@@ -12,27 +13,17 @@ const schema = buildSchema(`
     password: String!
   }
   
-  type DuplicatedUser {
-    message: String
-  }
-  
-  type EmptyUser {
+  type AccessDenied {
     message: String
   }
   
   type UnexpectedError {
     message: String
   }
-  
-  type AuthUserData {
-    roles: [String]
-    token: String
-    message: String
-  }
 
   type Query {
-    getAllUsers: [User]
-    getUser(id: ID!): User
+    getAllUsers: [UserData]
+    getUser(id: ID!): UserData
   }
 
   type Mutation {
@@ -40,7 +31,7 @@ const schema = buildSchema(`
     loginUser(input: UserInput): UserResult
   }
   
-   union UserResult = AuthUserData | DuplicatedUser | UnexpectedError | EmptyUser
+   union UserResult = UserData | UnexpectedError | AccessDenied
 `);
 
 export default schema
