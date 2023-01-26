@@ -6,6 +6,7 @@ const schema = buildSchema(`
     user_id: String
     message: String
     roles: [String]
+    access_token: String
   }
   
   input UserInput {

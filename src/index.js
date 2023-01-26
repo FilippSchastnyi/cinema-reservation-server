@@ -1,29 +1,27 @@
 import * as dotenv from 'dotenv'
+
 dotenv.config()
-import express from 'express'
-import {graphqlHTTP} from "express-graphql";
-import cors from "cors"
 import mongoose from "mongoose";
 import combinedSchema from "./graphQL/combinedSchema.js";
+import {ApolloServer} from "@apollo/server";
+import {startStandaloneServer} from "@apollo/server/standalone";
 
-const app = express()
+const server = new ApolloServer({
+  schema: combinedSchema,
+});
 
-app.use(cors()) // of course, we should think about security (*) - for developing period
-app.use('/graphql', graphqlHTTP({
-    graphiql: true, // switch the graphical interface on
-    schema: combinedSchema,
-}))
-
-mongoose.set('strictQuery', true)
-        .connect(process.env.DB_CONNECT)
-    .then(() => {
-    try {
-        app.listen(process.env.PORT, 'localhost', 5, () => {
-            console.log('The server has been started')
-        })
-    } catch (e) {
-        console.log(e)
-    }
+async function startServer(){
+await mongoose.set('strictQuery', true).connect(process.env.DB_CONNECT)
+const {url} = await startStandaloneServer(server, {
+  listen: {port: process.env.PORT},
+  context: async ({ req, res }) => {
+    return { req, res };
+  },
 })
+console.log(`🚀  Server ready at: ${url}`);
+}
+
+startServer().catch(e=>console.log(e))
+
 
 
