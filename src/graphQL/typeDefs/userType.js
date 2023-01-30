@@ -14,7 +14,7 @@ const schema = buildSchema(`
     password: String!
   }
   
-  type AccessDenied {
+  type AccessError {
     message: String
   }
   
@@ -29,10 +29,10 @@ const schema = buildSchema(`
 
   type Mutation {
     createUser(input: UserInput): UserResult
-    loginUser(input: UserInput): UserResult
+    logInUser(input: UserInput): UserResult
   }
   
-   union UserResult = UserData | UnexpectedError | AccessDenied
+   union UserResult = UserData | UnexpectedError | AccessError
 `);
 
 export default schema
