@@ -1,4 +1,4 @@
-import UserModel from "../../models/UserModel.js";
+import UserModel from "../../models/User.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import ErrorHandlerController from "./Error.controller.js"
@@ -19,17 +19,6 @@ async function generateToken(id, roles) {
 }
 
 class UserController {
-  getUserSuccessFormat(roles, user_id, email, token){
-    return {
-      __typename: "UserData",
-      message: "Success",
-      access_token: token,
-      roles,
-      user_id,
-      email
-    }
-  }
-
   async logInUser(_, {input}) {
     const {email, password} = input
 
@@ -44,8 +33,14 @@ class UserController {
     }
 
     const token = await generateToken(user._id, user.roles)
-
-    return this.getUserSuccessFormat(user.roles, user._id, user.email, token)
+    return {
+      __typename: "UserData",
+      message: "Success",
+      access_token: token,
+      roles: user.roles,
+      user_id: user._id,
+      email: user.email,
+    }
   }
 
   async createUser(_, {input}, {res}) {
@@ -61,7 +56,14 @@ class UserController {
     return await UserModel.create({email, password: hashedPassword, roles})
       .then(data => {
         const token = generateToken(data._id, roles)
-        return this.getUserSuccessFormat(data.roles, data._id, data.email, token)
+        return {
+          __typename: "UserData",
+          message: "Success",
+          access_token: token,
+          roles: data.roles,
+          user_id: data._id,
+          email: data.email,
+        };
       })
       .catch(() => {
         return ErrorHandlerController.userErrorHandler(error.UNEXPECTED_ERROR)

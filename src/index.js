@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 import mongoose from "mongoose";
-import combinedSchema from "./graphQL/combinedSchema.js";
+import combinedSchema from "./graphQL/combined.schema.js";
 import {ApolloServer} from "@apollo/server";
 import {startStandaloneServer} from "@apollo/server/standalone";
 
