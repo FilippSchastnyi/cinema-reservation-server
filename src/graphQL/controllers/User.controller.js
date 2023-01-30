@@ -5,18 +5,12 @@ import ErrorHandlerController from "./Error.controller.js"
 import error from "../../constants/error.js";
 
 
-async function getComparedResult(promiseCb) {
-  let isTrue = false
-  await promiseCb.then(res => isTrue = res)
-  return isTrue
+async function doesEmailExist(model, email) {
+  return model.findOne({ email }).then((result) => !!result);
 }
 
-async function arePasswordsMatch(password, hash) {
-  return bcrypt.compare(password, hash)
-}
-
-async function areEmailAddressesMatch(model, email) {
-  return model.findOne({email}).then(result => !!result)
+async function comparePasswords(password, hash) {
+  return bcrypt.compare(password, hash);
 }
 
 async function generateToken(id, roles) {
@@ -25,7 +19,6 @@ async function generateToken(id, roles) {
 }
 
 class UserController {
-
   getUserSuccessFormat(roles, user_id, email, token){
     return {
       __typename: "UserData",
@@ -39,14 +32,15 @@ class UserController {
 
   async logInUser(_, {input}) {
     const {email, password} = input
-    if (!await getComparedResult(areEmailAddressesMatch(UserModel, email))) {
-      return ErrorHandlerController.userErrorHandler(error.UNKNOWN_EMAIL)
+
+    if (!(await doesEmailExist(UserModel, email))) {
+      return ErrorHandlerController.userErrorHandler(error.UNKNOWN_EMAIL);
     }
 
     const user = await UserModel.findOne({email})
 
-    if (!await getComparedResult(arePasswordsMatch(password, user.password))) {
-      return ErrorHandlerController.userErrorHandler(error.INCORRECT_PASSWORD)
+    if (!(await comparePasswords(password, user.password))) {
+      return ErrorHandlerController.userErrorHandler(error.INCORRECT_PASSWORD);
     }
 
     const token = await generateToken(user._id, user.roles)
@@ -58,17 +52,18 @@ class UserController {
     const {email, password} = input
     const roles = ["USER"]
 
-    if (await getComparedResult(areEmailAddressesMatch(UserModel, email))) {
+    if (await doesEmailExist(UserModel, email)) {
       return ErrorHandlerController.userErrorHandler(error.DUPLICATED_EMAIL)
     }
 
-    const hashedPassword = await bcrypt.hash(password, 5).then(result => result)
+    const hashedPassword = await bcrypt.hash(password, 5);
 
     return await UserModel.create({email, password: hashedPassword, roles})
       .then(data => {
         const token = generateToken(data._id, roles)
         return this.getUserSuccessFormat(data.roles, data._id, data.email, token)
-      }, () => {
+      })
+      .catch(() => {
         return ErrorHandlerController.userErrorHandler(error.UNEXPECTED_ERROR)
       })
   }
