@@ -44,7 +44,7 @@ class UserController {
     return userSuccessFormat(token, user.roles, user._id, user.email)
   }
 
-  async createUser(_, {input}, {res}) {
+  async createUser(_, {input}) {
     const {email, password} = input
     const roles = ["USER"]
 
