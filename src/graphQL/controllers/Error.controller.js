@@ -1,34 +1,20 @@
-import error from "../../constants/error.js";
+class ErrorController {
 
-class ErrorHandlerController {
-
-  userErrorHandler(type) {
-    const defaultError = {
-      __typename: 'UnexpectedError',
-      message: "Internal Error, please contact the admin :(",
+  errorCreator(name, message){
+    return {
+      __typename: name,
+      message
     }
-    switch (type) {
-      case error.UNKNOWN_EMAIL:
-       return  {
-          __typename: 'AccessError',
-            message: 'This email address doesn`t exist',
-        }
-      case error.INCORRECT_PASSWORD:
-        return  {
-          __typename: 'AccessError',
-          message: 'Password is not match',
-        }
-      case error.DUPLICATED_EMAIL:
-        return  {
-          __typename: 'AccessError',
-          message: 'This email address has already existed',
-        }
-      case error.UNEXPECTED_ERROR:
-        return  defaultError
-      default:
-        return  defaultError
+  }
+
+  get userError() {
+    return{
+      DUPLICATED_EMAIL: this.errorCreator('AccessError', 'This email address has already existed'),
+      UNKNOWN_EMAIL : this.errorCreator('AccessError', 'This email address doesn`t exist'),
+      INCORRECT_PASSWORD : this.errorCreator('AccessError', 'Password is not match'),
+      UNEXPECTED_ERROR : this.errorCreator('UnexpectedError', 'Internal Error, please contact the admin :('),
     }
   }
 }
 
-export default new ErrorHandlerController()
+export default new ErrorController()
