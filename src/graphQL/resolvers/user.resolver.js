@@ -2,7 +2,7 @@ import UserController from '../controllers/User.controller.js'
 
 const userResolver = {
   Query: {
-    getUser: UserController.getUser,
+    getOneUser: UserController.getOneUser,
     getAllUsers: UserController.getAllUsers,
   },
   Mutation: {

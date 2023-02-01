@@ -64,7 +64,7 @@ class UserController {
       })
   }
 
-  async getUser(_, {id}) {
+  async getOneUser(_, {id}) {
     return UserModel.findById(id);
   }
 

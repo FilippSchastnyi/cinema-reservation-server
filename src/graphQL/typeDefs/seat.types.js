@@ -1,26 +1,26 @@
 import {buildSchema} from "graphql";
 
 const seatSchema = buildSchema(`
-  input seatInput {
+  input SeatInput {
     name: String,
     type: String,
     isBusy: Boolean
   }
   
-  type seatData {
+  type SeatData {
     name: String,
     type: String,
     isBusy: Boolean
   }
   
   type Query {
-    getAllSeats: [seatData]
-    getOneSeat(id: ID!): seatData
+    getAllSeats: [SeatData]
+    getOneSeat(id: ID!): SeatData
   }
   
   type Mutation {
-    createSeat(input: seatInput): seatData    
-    updateSeat(input: seatInput): seatData    
+    createSeat(input: SeatInput): SeatData    
+    updateSeat(input: SeatInput): SeatData    
   }
 `)
 

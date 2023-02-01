@@ -1,38 +1,46 @@
 import {buildSchema} from "graphql";
 
 const storeTypes = buildSchema(`
-  type storeData {
-    tickets: [
-      film:{id:ID}
-      price:String
-    ],
-    snacks: [
-      snack:{id:ID}
-      price:String
-    ], 
+  
+  type StoreData {
+    tickets: [Ticket]
+    snacks: [Snack]
   } 
   
-  input storeInput {
-    tickets: [
-      film:{id:ID}
-      price:String
-    ],
-    snacks: [
-      snack:{id:ID}
-      price:String
-    ], 
+  type Ticket {
+    film: ID
+    price: String
+  }
+  
+  type Snack {
+    snack: ID
+    price: String
+  }
+  
+  input StoreInput {
+    tickets: [TicketInput]
+    snacks: [SnackInput],
   } 
+  
+  input TicketInput {
+    film: ID
+    price: String
+  }
+  
+  input SnackInput {
+    snack: ID
+    price: String
+  }
   
   type Query {
-    getAllStores(): [StoreData]
+    getAllStores: [StoreData]
     getOneStore(id: ID!): StoreData
   }
   
   type Mutation{
-    createStore(input: storeInput): storeData
-    updateStore(id: ID!, input: storeInput): storeData
+    createStore(input: StoreInput): StoreData
+    updateStore(id: ID!, input: StoreInput): StoreData
   }
-
 `)
 
 export default storeTypes

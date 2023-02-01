@@ -4,18 +4,18 @@ const hallSchema = buildSchema(`
 
   type hallData {
     name: String!
-    size: Number
-    plan: [id: ID]
+    size: Int
+    plan: [ID]
   }
   
   input hallInput {
     name: String!
-    size: Number
-    plan: [id: ID]
+    size: Int
+    plan: [ID]
   }
   
   type Query {
-    getAllHalls(): [hallData]
+    getAllHalls: [hallData]
     getOneHall(id: ID!): hallData
   }
   
