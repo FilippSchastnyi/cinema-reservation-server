@@ -1,5 +1,5 @@
 import {buildSchema} from "graphql";
-//::TODO
+
 const snackSchema = buildSchema(`
  type snackData {
     name:String,
@@ -14,13 +14,13 @@ const snackSchema = buildSchema(`
  }
  
   type Query {
-    getAllSnacks: [filmData]
-    getOneSnack(id: ID!): filmData
+    getAllSnacks: [snackData]
+    getOneSnack(id: ID!): snackData
   }
   
   type Mutation {
-    createSnack(input: filmInput): filmData    
-    updateSnack(input: filmInput): filmData    
+    createSnack(input: snackInput): snackData    
+    updateSnack(input: snackInput): snackData    
   }
 `)
 

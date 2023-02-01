@@ -6,14 +6,14 @@ const cinemaSchema = buildSchema(`
     name: String
     city: String
     halls: [id:ID]
-    snacks: [id: ID]
+    store: [id: ID]
   }
   
   input cinemaInput {
     name: String!
     city: String!
     halls: [id:ID]
-    snacks: [id: ID]
+    store: [id: ID]
   }
   
   type Query {
