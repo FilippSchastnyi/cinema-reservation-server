@@ -1,26 +1,26 @@
 import {buildSchema} from "graphql";
-//::TODO
+
 const snackSchema = buildSchema(`
- type snackData {
+ type SnackData {
     name:String,
     price:String,
-    count: Number
+    count: Int
  }
  
- input snackInput {
+ input SnackInput {
     name:String,
     price:String,
-    count: Number
+    count: Int
  }
  
   type Query {
-    getAllSnacks: [filmData]
-    getOneSnack(id: ID!): filmData
+    getAllSnacks: [SnackData]
+    getOneSnack(id: ID!): SnackData
   }
   
   type Mutation {
-    createSnack(input: filmInput): filmData    
-    updateSnack(input: filmInput): filmData    
+    createSnack(input: SnackInput): SnackData    
+    updateSnack(input: SnackInput): SnackData    
   }
 `)
 

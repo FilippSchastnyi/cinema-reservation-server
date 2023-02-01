@@ -2,28 +2,28 @@ import {buildSchema} from "graphql"
 
 const cinemaSchema = buildSchema(`
 
-  type cinemaData {
+  type CinemaData {
     name: String
     city: String
-    halls: [id:ID]
-    snacks: [id: ID]
+    halls: [ID]
+    store: [ID]
   }
   
-  input cinemaInput {
+  input CinemaInput {
     name: String!
     city: String!
-    halls: [id:ID]
-    snacks: [id: ID]
+    halls: [ID]
+    store: [ID]
   }
   
   type Query {
-    getAllCinemas(): [cinemaData]
-    getOneCinema(id: ID!): cinemaData
+    getAllCinemas: [CinemaData]
+    getOneCinema(id: ID!): CinemaData
   }
   
   type Mutation{
-    createCinema(input: cinemaInput): cinemaData
-    updateCinema(id: ID!, input: cinemaInput): cinemaData
+    createCinema(input: CinemaInput): CinemaData
+    updateCinema(id: ID!, input: CinemaInput): CinemaData
   }
 `)
 
