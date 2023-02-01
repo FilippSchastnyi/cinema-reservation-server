@@ -1,6 +1,5 @@
 class FilmController {
   async createFilm(){
-    // существует ли фильм уже в базе?
 
   }
 
@@ -16,3 +15,5 @@ class FilmController {
 
   }
 }
+
+export default new FilmController()

@@ -1,32 +1,30 @@
 import {buildSchema} from "graphql"
-import filmSchema from "film.type.js"
 
-const schema = buildSchema(`
+const cinemaSchema = buildSchema(`
 
   type cinemaData {
     name: String
     city: String
-    films: [filmSchema.filmData]
-  }
-
-  type Hall {
-    name: String!
-    capacity: Int!
+    halls: [id:ID]
+    snacks: [id: ID]
   }
   
   input cinemaInput {
-    name: String
-    city: String
-    films: [filmSchema.filmData]
+    name: String!
+    city: String!
+    halls: [id:ID]
+    snacks: [id: ID]
   }
   
   type Query {
-    getAllCinema(): Cinema
-    getOneCinema(id: ID!): Cinema
+    getAllCinemas(): [cinemaData]
+    getOneCinema(id: ID!): cinemaData
   }
   
   type Mutation{
     createCinema(input: cinemaInput): cinemaData
-    updateCinema(id: ID!, input: CinemaInput): cinemaData
+    updateCinema(id: ID!, input: cinemaInput): cinemaData
   }
 `)
+
+export default cinemaSchema

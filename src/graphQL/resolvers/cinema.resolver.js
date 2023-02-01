@@ -2,12 +2,12 @@ import CinemaController from '../controllers/Cinema.controller.js'
 
 const CinemaResolver = {
   Query: {
-    getCinema: CinemaController.getCinema,
+    getOneCinema: CinemaController.getOneCinema,
     getAllCinemas: CinemaController.getAllCinemas,
   },
   Mutation: {
-    logInCinema: CinemaController.logInCinema,
     createCinema: CinemaController.createCinema,
+    updateCinema: CinemaController.updateCinema,
   }
 }
 

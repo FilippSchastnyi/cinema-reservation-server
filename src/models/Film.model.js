@@ -3,8 +3,7 @@ import {Schema, model} from "mongoose";
 const filmSchema = new Schema({
   name: {type: String, required: true},
   description: {type: String, required: true},
-  schedules: [{type: Schema.Types.ObjectId, ref: 'Schedule'}]
-/*  image: {type: Buffer}*/
+/*  image: {type: Buffer} or store pictures on the server into the static folder ? ::TODO*/
 })
 
 export default model('Film', filmSchema)

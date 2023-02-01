@@ -1,16 +1,14 @@
 import {buildSchema} from "graphql";
 
-const schema = buildSchema(`
+const filmSchema = buildSchema(`
   input filmInput {
     name: String,
     description: String,
-    image: String
   }
   
   type filmData {
     name: String!,
     description: String!,
-    image: String    
   }
   
   type Query {
@@ -20,8 +18,8 @@ const schema = buildSchema(`
   
   type Mutation {
     createFilm(input: filmInput): filmData    
-    createFilm(input: filmInput): filmData    
+    updateFilm(input: filmInput): filmData    
   }
 `)
 
-export default schema
+export default filmSchema

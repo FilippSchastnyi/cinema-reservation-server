@@ -11,7 +11,9 @@ class CinemaController {
 
   }
 
-  async getCinema(){
+  async getOneCinema(){
 
   }
 }
+
+export default new CinemaController()

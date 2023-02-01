@@ -6,8 +6,8 @@ const FilmResolver = {
     getAllFilms: FilmController.getAllFilms,
   },
   Mutation: {
-    logInFilm: FilmController.logInFilm,
     createFilm: FilmController.createFilm,
+    updateFilm: FilmController.updateFilm,
   }
 }
 

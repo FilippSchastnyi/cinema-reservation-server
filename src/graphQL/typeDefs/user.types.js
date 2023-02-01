@@ -1,6 +1,6 @@
 import {buildSchema} from 'graphql'
 
-const schema = buildSchema(`
+const userSchema = buildSchema(`
   type UserData {
     email: String
     user_id: String
@@ -35,4 +35,4 @@ const schema = buildSchema(`
    union UserResult = UserData | UnexpectedError | AccessError
 `);
 
-export default schema
+export default userSchema
