@@ -2,10 +2,7 @@ import UserModel from "../../models/User.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import ErrorController from "./Error.controller.js"
-
-async function doesEmailExist(model, email) {
-  return model.findOne({ email }).then((result) => !!result);
-}
+import Utils from "../../utils/Utils.js";
 
 async function comparePasswords(password, hash) {
   return bcrypt.compare(password, hash);
@@ -31,7 +28,7 @@ class UserController {
   async logInUser(_, {input}) {
     const {email, password} = input
 
-    if (!(await doesEmailExist(UserModel, email))) {
+    if (!(await Utils.doesDocumentExist(UserModel, email))) {
       return ErrorController.userError.UNKNOWN_EMAIL;
     }
 
@@ -48,7 +45,7 @@ class UserController {
     const {email, password} = input
     const roles = ["USER"]
 
-    if (await doesEmailExist(UserModel, email)) {
+    if (await Utils.doesDocumentExist(UserModel, email)) {
       return ErrorController.userError.DUPLICATED_EMAIL
     }
 

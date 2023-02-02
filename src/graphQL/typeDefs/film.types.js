@@ -18,7 +18,7 @@ const filmSchema = buildSchema(`
   
   type Mutation {
     createFilm(input: FilmInput): FilmData    
-    updateFilm(input: FilmInput): FilmData    
+    updateFilm(id:ID, input: FilmInput): FilmData    
   }
 `)
 
