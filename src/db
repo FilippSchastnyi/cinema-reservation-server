@@ -1,19 +1,5 @@
-import {Schema, model} from "mongoose";
+*FILMS*
 
-const filmSchema = new Schema({
-  name: {type: String, required: true, unique: true},
-  description: {type: String, required: true},
-  country: {type: String, required: true},
-  director: {type: String, required: true},
-  duration: {type: String, required: true},
-  release: {type: String, required: true},
-  genres: [{type: Schema.Types.ObjectId, required: true, ref: "Genre"}],
-  image: {type: String}
-})
-
-export default model('Film', filmSchema)
-
-/*
 db.films.insertOne({
   name: "Аватар: Путь воды",
   description: "После принятия образа аватара солдат Джейк Салли становится предводителем народа на'ви и берет на себя миссию по защите новых друзей от корыстных бизнесменов с Земли. Теперь ему есть за кого бороться — с Джейком его прекрасная возлюбленная Нейтири. Когда на Пандору возвращаются до зубов вооруженные земляне, Джейк готов дать им отпор.",
@@ -26,4 +12,3 @@ db.films.insertOne({
       ObjectId("63dbbf8669342432f6271cdb"),
   ]
 })
-*/
