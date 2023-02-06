@@ -13,6 +13,11 @@ const filmSchema = `
     image: Upload
   }
   
+  input ChunkInput {
+    page: Int
+    limit: Int
+  }
+  
   type FilmData {
     name: String
     description: String
@@ -27,6 +32,7 @@ const filmSchema = `
   type Query {
     getAllFilms: [FilmData]
     getOneFilm(id: ID!): FilmData
+    getChunkOfFilms(input: ChunkInput): [FilmData]
   }
   
   type Mutation {
