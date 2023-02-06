@@ -42,7 +42,7 @@ await server.start();
    * Set up our Express middleware to handle CORS, body parsing,`
    * and our expressMiddleware function.
    **/
-app.use('/',
+app.use('/graphql',
   cors(),
   /**
    * set 50mb body limit
@@ -56,6 +56,8 @@ app.use('/',
     context: async ({req}) => ({token: req.headers.token}),
   }),
 );
+
+app.use(express.static('static'))
   /**
    * Just a port for develop condition and default one
    **/
