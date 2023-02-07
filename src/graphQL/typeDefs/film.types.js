@@ -16,6 +16,7 @@ const filmSchema = `
   input ChunkInput {
     page: Int
     limit: Int
+    filmIds: [ID]
   }
   
   type FilmData {
@@ -32,12 +33,12 @@ const filmSchema = `
   type Query {
     getAllFilms: [FilmData]
     getOneFilm(id: ID!): FilmData
-    getChunkOfFilms(input: ChunkInput): [FilmData]
   }
   
   type Mutation {
     createFilm(input: FilmInput): FilmData    
-    updateFilm(id:ID, input: FilmInput): FilmData    
+    updateFilm(id:ID, input: FilmInput): FilmData   
+    getChunkOfFilms(input: ChunkInput): [FilmData] 
   }
   
   scalar Upload

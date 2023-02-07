@@ -8,6 +8,7 @@ const FilmResolver = {
   Mutation: {
     createFilm: FilmController.createFilm,
     updateFilm: FilmController.updateFilm,
+    getChunkOfFilms: FilmController.getChunkOfFilms,
   }
 }
 

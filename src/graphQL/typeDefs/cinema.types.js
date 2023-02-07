@@ -4,16 +4,18 @@ const cinemaSchema = buildSchema(`
 
   type CinemaData {
     name: String
-    city: String
+    city: ID
+    films: [ID]
     halls: [ID]
-    store: [ID]
+    store: ID
   }
   
   input CinemaInput {
-    name: String!
-    city: String!
+    name: String
+    city: ID
+    films: [ID]
     halls: [ID]
-    store: [ID]
+    store: ID
   }
   
   type Query {
@@ -21,7 +23,7 @@ const cinemaSchema = buildSchema(`
     getOneCinema(id: ID!): CinemaData
   }
   
-  type Mutation{
+  type Mutation {
     createCinema(input: CinemaInput): CinemaData
     updateCinema(id: ID!, input: CinemaInput): CinemaData
   }

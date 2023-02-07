@@ -2,9 +2,10 @@ import {Schema, model} from "mongoose";
 
 const cinemaSchema = new Schema({
   name: {type:String, required: true },
-  city: {type:String, required: true },
-  halls: [{type: Schema.Types.ObjectId, ref: 'Hall', required: true}],
-  store: {type: Schema.Types.ObjectId, ref: 'Store'}
+  city: {type: Schema.Types.ObjectId, ref: 'city'},
+  films: [{type: Schema.Types.ObjectId, ref: 'film'}],
+  halls: [{type: Schema.Types.ObjectId, ref: 'hall'}],
+  store: {type: Schema.Types.ObjectId, ref: 'store'}
 })
 
 export default model('Cinema', cinemaSchema)
