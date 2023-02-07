@@ -1,7 +1,7 @@
 import {makeExecutableSchema} from '@graphql-tools/schema'
 /**   RESOLVERS   **/
 import userResolver from "./resolvers/user.resolver.js";
-import cinemaResolver from "./resolvers/user.resolver.js";
+import cinemaResolver from "./resolvers/cinema.resolver.js";
 import storeResolver from "./resolvers/store.resolver.js";
 import filmResolver from "./resolvers/film.resolver.js";
 import hallResolver from "./resolvers/hall.resolver.js";
@@ -20,6 +20,8 @@ import planTypes from "./typeDefs/plan.types.js";
 import seatTypes from "./typeDefs/seat.types.js";
 import snackTypes from "./typeDefs/snack.types.js";
 import genreTypes from "./typeDefs/genre.types.js";
+import cityTypes from "./typeDefs/city.types.js";
+import cityResolver from "./resolvers/city.resolver.js";
 
 const combinedSchema = makeExecutableSchema({
   typeDefs: [
@@ -31,7 +33,8 @@ const combinedSchema = makeExecutableSchema({
     planTypes,
     seatTypes,
     snackTypes,
-    genreTypes
+    genreTypes,
+    cityTypes
   ],
   resolvers: [
     customResolvers,
@@ -43,7 +46,8 @@ const combinedSchema = makeExecutableSchema({
     planResolver,
     seatResolver,
     snackResolver,
-    genreResolver
+    genreResolver,
+    cityResolver
   ],
 });
 

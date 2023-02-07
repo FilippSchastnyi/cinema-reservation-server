@@ -29,15 +29,21 @@ class FilmController {
 
   }
 
-  async getChunkOfFilms(page, limit){
-    const startFrom = page * limit
-    const films = await FilmModel.find({}).skip(startFrom).limit(limit)
-    const count = await films.countDocuments()
-    console.log(count)
-    return films
+  async getChunkOfFilms(_, { input }) {
+    const { page, limit, filmIds } = input;
+    const start = (page - 1) * limit;
+    const query = filmIds.length ? { _id: { $in: filmIds } } : {};
+
+    let films = await FilmModel.find(query).skip(start).limit(limit);
+
+    if (!films.length){
+      films = await FilmModel.find(query).skip(0).limit(limit);
+    }
+
+    return films;
   }
 
-  async getAllFilms() {
+  async getAllFilms(_, { input }) {
     return FilmModel.find({})
   }
 

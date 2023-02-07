@@ -28,7 +28,7 @@ class UserController {
   async logInUser(_, {input}) {
     const {email, password} = input
 
-    if (!(await Utils.doesDocumentExist(UserModel, email))) {
+    if (!(await Utils.doesDocumentExist(UserModel, {email}))) {
       return ErrorController.userError.UNKNOWN_EMAIL;
     }
 
@@ -45,7 +45,7 @@ class UserController {
     const {email, password} = input
     const roles = ["USER"]
 
-    if (await Utils.doesDocumentExist(UserModel, email)) {
+    if (await Utils.doesDocumentExist(UserModel, {email})) {
       return ErrorController.userError.DUPLICATED_EMAIL
     }
 
