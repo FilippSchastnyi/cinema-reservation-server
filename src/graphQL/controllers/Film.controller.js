@@ -2,6 +2,7 @@ import Utils from "../../utils/Utils.js";
 import FilmModel from "../../models/Film.model.js";
 import fs from "fs"
 import path from "path";
+import CinemaModel from "../../models/Cinema.model.js";
 
 class FilmController {
   async createFilm(_, {input}) {
@@ -10,8 +11,6 @@ class FilmController {
     const stream = createReadStream()
     const pathToSaveImage = path.join(__dirname, `/static/img/films/${filename}`)
     await stream.pipe(fs.createWriteStream(pathToSaveImage))
-
-    console.log(pathToSaveImage)
 
     if (await Utils.doesDocumentExist(FilmModel, {name: input.name})) {
       return null
@@ -29,17 +28,25 @@ class FilmController {
 
   }
 
-  async getChunkOfFilms(_, { input }) {
-    const { page, limit, filmIds } = input;
+  async getCinemaFilms(_, {input}) {
+    const { page = 1, limit = 0, name } = input;
     const start = (page - 1) * limit;
-    const query = filmIds.length ? { _id: { $in: filmIds } } : {};
+    const cinema = await CinemaModel.find({name})
 
-    let films = await FilmModel.find(query).skip(start).limit(limit);
-
-    if (!films.length){
-      films = await FilmModel.find(query).skip(0).limit(limit);
+    if (!cinema.length) {
+      return [];
     }
 
+    const filmIds = cinema[0].films;
+
+    const films = await FilmModel.find({ _id: { $in: filmIds } })
+      .skip(start)
+      .limit(limit);
+    const __dirname = "http://localhost:5000/img/films/"
+
+    films.forEach((film)=>{
+      film.image = path.join(__dirname, `${film.image}`)
+    })
     return films;
   }
 
