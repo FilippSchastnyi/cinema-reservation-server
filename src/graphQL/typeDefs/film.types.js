@@ -26,7 +26,7 @@ const filmSchema = `
     director: String
     duration: String
     release: String 
-    genres: [ID]
+    genres: [String]
     image: String
   }
   

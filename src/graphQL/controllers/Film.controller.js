@@ -3,6 +3,7 @@ import FilmModel from "../../models/Film.model.js";
 import fs from "fs"
 import path from "path";
 import CinemaModel from "../../models/Cinema.model.js";
+import GenreModel from "../../models/Genre.model.js";
 
 class FilmController {
   async createFilm(_, {input}) {
@@ -39,15 +40,25 @@ class FilmController {
 
     const filmIds = cinema[0].films;
 
-    const films = await FilmModel.find({ _id: { $in: filmIds } })
+    let films = await FilmModel.find({ _id: { $in: filmIds } })
       .skip(start)
       .limit(limit);
-    const __dirname = "http://localhost:5000/img/films/"
+    const baseImageUrl = "http://localhost:5000/img/films/";
 
-    films.forEach((film)=>{
-      film.image = path.join(__dirname, `${film.image}`)
-    })
-    return films;
+    const processedFilms = []
+
+    for (let film of films) {
+      const updatedFilm = {...film.toObject()}
+      const image = baseImageUrl + film.image;
+      const genres = await GenreModel.find({_id: {$in: film.genres}})
+      const genresToString = genres.map(genre => genre.name)
+      updatedFilm.genres = genres
+      updatedFilm.image = image
+      updatedFilm.genres = genresToString
+      processedFilms.push(updatedFilm)
+    }
+
+    return processedFilms;
   }
 
   async getAllFilms(_, { input }) {
