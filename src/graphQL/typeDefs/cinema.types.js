@@ -3,11 +3,11 @@ import {buildSchema} from "graphql"
 const cinemaSchema = buildSchema(`
 
   type CinemaData {
+    _id:ID
     name: String
     city: ID
     films: [ID]
     halls: [ID]
-    store: ID
   }
   
   input CinemaInput {

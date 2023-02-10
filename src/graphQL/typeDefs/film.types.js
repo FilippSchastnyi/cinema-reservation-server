@@ -20,6 +20,7 @@ const filmSchema = `
   }
   
   type FilmData {
+    _id:ID
     name: String
     description: String
     country: String

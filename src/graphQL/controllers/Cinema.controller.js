@@ -15,7 +15,7 @@ class CinemaController {
   }
 
   async getAllCinemas(){
-
+    return CinemaModel.find({})
   }
 
   async getOneCinema(_, id){
