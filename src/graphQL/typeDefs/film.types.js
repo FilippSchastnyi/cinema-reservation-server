@@ -19,6 +19,11 @@ const filmSchema = `
     name: String
   }
   
+  type GenreData {
+    _id: ID,
+    name: String
+  }
+  
   type FilmData {
     _id:ID
     name: String
@@ -27,7 +32,7 @@ const filmSchema = `
     director: String
     duration: String
     release: String 
-    genres: [String]
+    genres: [GenreData]
     image: String
   }
   

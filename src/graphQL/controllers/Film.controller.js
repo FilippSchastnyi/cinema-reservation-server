@@ -50,11 +50,8 @@ class FilmController {
     for (let film of films) {
       const updatedFilm = {...film.toObject()}
       const image = baseImageUrl + film.image;
-      const genres = await GenreModel.find({_id: {$in: film.genres}})
-      const genresToString = genres.map(genre => genre.name)
-      updatedFilm.genres = genres
+      updatedFilm.genres = await GenreModel.find({_id: {$in: film.genres}})
       updatedFilm.image = image
-      updatedFilm.genres = genresToString
       processedFilms.push(updatedFilm)
     }
 
