@@ -2,11 +2,33 @@ import {buildSchema} from "graphql"
 
 const cinemaSchema = buildSchema(`
 
+  type GenreData {
+    _id: ID,
+    name: String
+  }
+  
+  type CityData {
+    name: String
+  }
+  
+
+  type FilmData {
+    _id:ID
+    name: String
+    description: String
+    country: String
+    director: String
+    duration: String
+    release: String 
+    genres: [GenreData]
+    image: String
+  }
+
   type CinemaData {
     _id:ID
     name: String
-    city: ID
-    films: [ID]
+    city: CityData
+    films: [FilmData]
     halls: [ID]
   }
   
