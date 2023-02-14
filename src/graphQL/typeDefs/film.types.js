@@ -36,10 +36,15 @@ const filmSchema = `
     image: String
   }
   
+  type CinemaFilmData {
+    films: [FilmData],
+    documentsCount: Int
+  }
+  
   type Query {
     getAllFilms: [FilmData]
     getOneFilm(id: ID!): FilmData
-    getCinemaFilms(input: InputQuery): [FilmData]
+    getCinemaFilms(input: InputQuery): CinemaFilmData
   }
   
   type Mutation {
