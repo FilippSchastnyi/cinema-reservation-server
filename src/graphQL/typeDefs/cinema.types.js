@@ -5,12 +5,7 @@ const cinemaSchema = buildSchema(`
   type GenreData {
     _id: ID,
     name: String
-  }
-  
-  type CityData {
-    name: String
-  }
-  
+  }  
 
   type FilmData {
     _id:ID
@@ -27,7 +22,7 @@ const cinemaSchema = buildSchema(`
   type CinemaData {
     _id:ID
     name: String
-    city: CityData
+    city: String
     films: [FilmData]
     halls: [ID]
   }

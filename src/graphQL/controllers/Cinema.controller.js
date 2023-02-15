@@ -25,16 +25,14 @@ class CinemaController {
       const films = await filmModel.find({_id: {$in: cinema.films}})
       const city = await CityModel.findOne({_id: cinema.city})
       updatedCinema.films = films
-      updatedCinema.city = city
+      updatedCinema.city = city.name
       processedCinemas.push(updatedCinema)
     }
-    console.log(processedCinemas)
     return processedCinemas
   }
 
-  async getOneCinema(_, id){
-    console.log('?')
-    return CinemaModel.findOne({id})
+  async getOneCinema(_, input){
+    return CinemaModel.findOne({_id: input.id})
   }
 }
 
