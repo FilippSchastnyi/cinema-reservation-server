@@ -4,8 +4,9 @@ const cinemaSchema = new Schema({
   name: {type:String, required: true },
   city: {type: Schema.Types.ObjectId, ref: 'city'},
   films: [{type: Schema.Types.ObjectId, ref: 'film'}],
-  halls: [{type: Schema.Types.ObjectId, ref: 'hall'}],
-  store: {type: Schema.Types.ObjectId, ref: 'store'}
+  schedule: [{type: Schema.Types.ObjectId, ref: 'session'}],
+  store: {type: Schema.Types.ObjectId, ref: 'store'},
+  halls: [{type: Schema.Types.ObjectId, ref: 'halls'}],
 })
 
 export default model('Cinema', cinemaSchema)

@@ -7,7 +7,7 @@ const filmSchema = new Schema({
   director: {type: String, required: true},
   duration: {type: String, required: true},
   release: {type: String, required: true},
-  genres: [{type: Schema.Types.ObjectId, required: true, ref: "Genre"}],
+  genres: [{type: Schema.Types.ObjectId, required: true, ref: "genre"}],
   image: {type: String}
 })
 

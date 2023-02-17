@@ -4,10 +4,11 @@ import fs from "fs"
 import path from "path";
 import CinemaModel from "../../models/Cinema.model.js";
 import GenreModel from "../../models/Genre.model.js";
+import {sortFilmsModule} from "../modules/sort-films.module.js";
 
 class FilmController {
   async createFilm(_, {input}) {
-    const { filename,  mimetype, createReadStream} = await input.image
+    const { filename, createReadStream} = await input.image
     const __dirname = path.resolve();
     const stream = createReadStream()
     const pathToSaveImage = path.join(__dirname, `/static/img/films/${filename}`)
@@ -22,7 +23,6 @@ class FilmController {
     } catch (e) {
       console.log(e)
     }
-
   }
 
   async updateFilm() {
@@ -30,32 +30,32 @@ class FilmController {
   }
 
   async getCinemaFilms(_, {input}) {
-    const { page = 1, limit = 0, name } = input;
-    const start = (page - 1) * limit;
+    const {name} = input
     const cinema = await CinemaModel.find({name})
+    if (!cinema.length)  return [];
 
-    if (!cinema.length) {
-      return [];
-    }
+    const cinemaFilmsIds = cinema[0].films;
+    const cinemaFilms = await FilmModel.find({ _id: { $in: cinemaFilmsIds } })
+    const cinemaFilmsOutput = sortFilmsModule(input, cinemaFilms)
+    const documentsCount = cinemaFilms.length
 
-    const filmIds = cinema[0].films;
 
-    let films = await FilmModel.find({ _id: { $in: filmIds } })
-      .skip(start)
-      .limit(limit);
     const baseImageUrl = "http://localhost:5000/img/films/";
-
     const processedFilms = []
 
-    for (let film of films) {
+    for (let film of cinemaFilmsOutput) {
       const updatedFilm = {...film.toObject()}
       const image = baseImageUrl + film.image;
-      updatedFilm.genres = await GenreModel.find({_id: {$in: film.genres}})
+      const genres = await GenreModel.find({_id: {$in: film.genres}})
+      updatedFilm.genres = genres
       updatedFilm.image = image
       processedFilms.push(updatedFilm)
     }
 
-    return processedFilms;
+    return {
+      films: processedFilms,
+      documentsCount
+    };
   }
 
   async getAllFilms(_, { input }) {
