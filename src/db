@@ -12,3 +12,684 @@ db.films.insertOne({
       ObjectId("63dbbf8669342432f6271cdb"),
   ]
 })
+
+
+
+
+///////////////////////////////////////////////Session//////////////////////////////////////////////////////////////
+
+{
+  "input": {
+    "film": "63e11d520678d1b4104ac6b0",
+    "hall": "63ef62fb9455072b1b849257",
+    "showTime": "2023-02-18T15:30:00Z",
+    "booking": [
+      {
+        "row": 4,
+        "seat": 5
+      },
+      {
+        "row": 2,
+        "seat": 3
+      },
+      {
+        "row": 6,
+        "seat": 7
+      },
+    ]
+  }
+}
+
+///////////////////////////////////////////////HALL////////////////////////////////////////////////////////////////
+
+{
+  "input": {
+    "name": "GOLDEN_GATE_1",
+    "plan": [
+      {
+        "rowNumber": 1,
+        "seats": [
+          {
+            "seatNumber": 1,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 2,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 3,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 4,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 5,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 6,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 7,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 8,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 9,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 10,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 11,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 12,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 13,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 14,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 15,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 16,
+            "status": "STANDARD",
+            "isBusy": false
+          }
+        ]
+      },
+           {
+        "rowNumber": 2,
+        "seats": [
+          {
+            "seatNumber": 1,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 2,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 3,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 4,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 5,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 6,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 7,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 8,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 9,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 10,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 11,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 12,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 13,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 14,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+                  {
+            "seatNumber": 15,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+                  {
+            "seatNumber": 16,
+            "status": "STANDARD",
+            "isBusy": false
+          }
+        ]
+      },
+           {
+        "rowNumber": 3,
+        "seats": [
+          {
+            "seatNumber": 1,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 2,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 3,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 4,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 5,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 6,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 7,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 8,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 9,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 10,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 11,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 12,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 13,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 14,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+        ]
+      },
+           {
+        "rowNumber": 4,
+        "seats": [
+          {
+            "seatNumber": 1,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 2,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 3,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 4,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 5,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 6,
+            "status": "STANDARD",
+            "isBusy": false
+          }
+        ]
+      },
+           {
+        "rowNumber": 5,
+        "seats": [
+          {
+            "seatNumber": 1,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 2,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 3,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 4,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 5,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 6,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 7,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 8,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 9,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 10,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 11,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 12,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 13,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 14,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+        ]
+      },
+           {
+        "rowNumber": 6,
+        "seats": [
+          {
+            "seatNumber": 1,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 2,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 3,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 4,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 5,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 6,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 7,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 8,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 9,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 10,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 11,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 12,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 13,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 14,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+        ]
+      },
+           {
+        "rowNumber": 7,
+        "seats": [
+          {
+            "seatNumber": 1,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 2,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 3,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 4,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 5,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 6,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 7,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 8,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 9,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 10,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 11,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 12,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 13,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 14,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+        ]
+      },
+           {
+        "rowNumber": 8,
+        "seats": [
+          {
+            "seatNumber": 1,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 2,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 3,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 4,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 5,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 6,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 7,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 8,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 9,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 10,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 11,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 12,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 13,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+           {
+            "seatNumber": 14,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+        ]
+      },     {
+        "rowNumber": 9,
+        "seats": [
+          {
+            "seatNumber": 1,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 2,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 3,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 4,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 5,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 6,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 7,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 8,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 9,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 10,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+          {
+            "seatNumber": 11,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+                    {
+            "seatNumber": 12,
+            "status": "STANDARD",
+            "isBusy": false
+          },
+        ]
+      }
+    ]
+  }
+}

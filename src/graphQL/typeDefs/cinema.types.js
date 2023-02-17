@@ -24,14 +24,14 @@ const cinemaSchema = buildSchema(`
     name: String
     city: String
     films: [FilmData]
-    halls: [ID]
+    schedule: [ID]
   }
   
   input CinemaInput {
     name: String
     city: ID
     films: [ID]
-    halls: [ID]
+    schedule: [ID]
     store: ID
   }
   

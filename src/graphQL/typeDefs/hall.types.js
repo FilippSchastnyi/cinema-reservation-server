@@ -2,20 +2,49 @@ import {buildSchema} from "graphql";
 
 const hallSchema = buildSchema(`
 
+  scalar DateTime
+
+  type Seat {
+    seatNumber: Int
+    status: String
+    isBusy: Boolean
+  }
+  
+  input SeatInput {
+    seatNumber: Int
+    status: String
+    isBusy: Boolean 
+  }
+  
+  type Row {
+    rowNumber: Int
+    seats: [Seat]
+  }
+  
+  input RowInput {
+    rowNumber: Int
+    seats: [SeatInput]
+  }
+  
   type hallData {
     name: String!
-    size: Int
-    plan: [ID]
+    plan: [Row]
+    showTimeList: [DateTime]
+  }
+  
+  type cinemaHall {
+    cinemaName: String,
+    halls: [hallData]
   }
   
   input hallInput {
     name: String!
-    size: Int
-    plan: [ID]
+    plan: [RowInput]
+    sessions: [ID]
   }
   
   type Query {
-    getAllHalls: [hallData]
+    getAllHalls(cinemaId: ID!): cinemaHall
     getOneHall(id: ID!): hallData
   }
   

@@ -37,7 +37,7 @@ const filmSchema = `
   }
   
   type CinemaFilmData {
-    films: [FilmData],
+    films: [FilmData]
     documentsCount: Int
   }
   
