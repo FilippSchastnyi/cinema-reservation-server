@@ -28,7 +28,7 @@ const hallSchema = buildSchema(`
   
   type showTime {
     _id: ID
-    showTime: DateTime
+    startTime: DateTime
   }
   
   type hallData {

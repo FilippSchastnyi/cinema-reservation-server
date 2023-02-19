@@ -23,7 +23,7 @@ class HallController {
       const hallSchedule = sessions.map(session => {
         return {
           _id: session._id,
-          showTime: session.showTime
+          startTime: session.showTime
         }
       })
       processedHalls.push({
@@ -33,7 +33,6 @@ class HallController {
       })
     }
     const cinemaName = cinema.name
-    console.log()
 
     return {
       cinemaName,
