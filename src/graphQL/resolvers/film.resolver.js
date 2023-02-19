@@ -2,7 +2,7 @@ import FilmController from '../controllers/Film.controller.js'
 
 const FilmResolver = {
   Query: {
-    getOneFilm: FilmController.getFilm,
+    getOneFilm: FilmController.getOneFilm,
     getAllFilms: FilmController.getAllFilms,
     getCinemaFilms: FilmController.getCinemaFilms,
   },

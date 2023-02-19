@@ -26,10 +26,16 @@ const hallSchema = buildSchema(`
     seats: [SeatInput]
   }
   
+  type showTime {
+    _id: ID
+    showTime: DateTime
+  }
+  
   type hallData {
+    _id: ID
     name: String!
     plan: [Row]
-    showTimeList: [DateTime]
+    schedule: [showTime]
   }
   
   type cinemaHall {

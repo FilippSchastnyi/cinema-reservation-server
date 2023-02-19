@@ -19,18 +19,26 @@ class HallController {
 
     const processedHalls = []
     for (let hall of halls) {
-      const sessionList = await SessionModel.find({_id: {$in: hall.sessions}})
-      const showTimeList = sessionList.map(session => session.showTime)
+      const sessions = await SessionModel.find({_id: {$in: hall.schedule}})
+      const hallSchedule = sessions.map(session => {
+        return {
+          _id: session._id,
+          showTime: session.showTime
+        }
+      })
       processedHalls.push({
+        _id: hall._id,
         name: hall.name,
-        showTimeList
+        schedule: hallSchedule
       })
     }
     const cinemaName = cinema.name
+    console.log()
 
     return {
       cinemaName,
       halls: processedHalls
+
     }
   }
 

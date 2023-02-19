@@ -8,7 +8,7 @@ import {sortFilmsModule} from "../modules/sort-films.module.js";
 
 class FilmController {
   async createFilm(_, {input}) {
-    const { filename, createReadStream} = await input.image
+    const {filename, createReadStream} = await input.image
     const __dirname = path.resolve();
     const stream = createReadStream()
     const pathToSaveImage = path.join(__dirname, `/static/img/films/${filename}`)
@@ -32,10 +32,10 @@ class FilmController {
   async getCinemaFilms(_, {input}) {
     const {name} = input
     const cinema = await CinemaModel.find({name})
-    if (!cinema.length)  return [];
+    if (!cinema.length) return [];
 
     const cinemaFilmsIds = cinema[0].films;
-    const cinemaFilms = await FilmModel.find({ _id: { $in: cinemaFilmsIds } })
+    const cinemaFilms = await FilmModel.find({_id: {$in: cinemaFilmsIds}})
     const cinemaFilmsOutput = sortFilmsModule(input, cinemaFilms)
     const documentsCount = cinemaFilms.length
 
@@ -53,17 +53,21 @@ class FilmController {
     }
 
     return {
-      films: processedFilms,
-      documentsCount
+      films: processedFilms, documentsCount
     };
   }
 
-  async getAllFilms(_, { input }) {
+  async getAllFilms(_, {input}) {
     return FilmModel.find({})
   }
 
-  async getFilm() {
-
+  async getOneFilm(_, input) {
+    const {id} = input
+    const currentFilm = await FilmModel.findOne({_id: id})
+    const genres = await GenreModel.find({_id: {$in: currentFilm.genres}})
+    const baseImageUrl = "http://localhost:5000/img/films/";
+    const image = baseImageUrl + currentFilm.image;
+    return {...currentFilm.toObject(), genres, image}
   }
 }
 
