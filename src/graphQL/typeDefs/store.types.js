@@ -2,35 +2,39 @@ import {buildSchema} from "graphql";
 
 const storeTypes = buildSchema(`
   
-  type StoreData {
-    tickets: [Ticket]
-    snacks: [Snack]
-  } 
-  
   type Ticket {
-    film: ID
-    price: String
+    type: String
+    price: Float
   }
-  
-  type Snack {
-    snack: ID
-    price: String
-  }
-  
-  input StoreInput {
-    tickets: [TicketInput]
-    snacks: [SnackInput],
-  } 
   
   input TicketInput {
-    film: ID
-    price: String
+    type: String
+    price: Float
   }
   
-  input SnackInput {
-    snack: ID
-    price: String
+  type GoodsData {
+    name: String
+    price: Float
+    count: Int
   }
+  
+  input GoodsInput {
+    name: String
+    price: Float
+    count: Int
+  }
+  
+  type StoreData {
+    name: String
+    tickets: [Ticket]
+    goods: [GoodsData]
+  } 
+  
+  input StoreInput {
+    name: String
+    tickets: [TicketInput]
+    goods: [GoodsInput]
+  } 
   
   type Query {
     getAllStores: [StoreData]

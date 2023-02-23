@@ -6,6 +6,23 @@ const cinemaSchema = buildSchema(`
     _id: ID,
     name: String
   }  
+  
+  type Ticket {
+    type: String
+    price: Float
+  }
+  
+  type GoodsData {
+    name: String
+    price: Float
+    count: Int
+  }
+  
+  type StoreData {
+    name: String
+    tickets: [Ticket]
+    goods: [GoodsData]
+  } 
 
   type FilmData {
     _id:ID
@@ -25,6 +42,7 @@ const cinemaSchema = buildSchema(`
     city: String
     films: [FilmData]
     schedule: [ID]
+    store: StoreData
   }
   
   input CinemaInput {

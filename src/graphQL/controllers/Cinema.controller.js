@@ -2,6 +2,7 @@ import CinemaModel from "../../models/Cinema.model.js";
 import cinemaModel from "../../models/Cinema.model.js";
 import filmModel from "../../models/Film.model.js";
 import CityModel from "../../models/City.model.js";
+import storeModel from "../../models/Store.model.js";
 
 class CinemaController {
   async createCinema(_, {input}){
@@ -32,7 +33,7 @@ class CinemaController {
   }
 
   async getOneCinema(_, input){
-    return CinemaModel.findOne({_id: input.id})
+    return CinemaModel.findOne({_id: input.id}).populate({path: "store", model:storeModel})
   }
 }
 

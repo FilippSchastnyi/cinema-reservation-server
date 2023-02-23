@@ -3,12 +3,13 @@ import {model, Schema} from "mongoose";
 const storeSchema = new Schema({
   name: {type: String, required: true},
   tickets: [{
-    film: {type: Schema.Types.ObjectId, ref:'Film'},
-    price: {type: String, required: true}
+    type: {type: String},
+    price: {type: Number, required: true}
   }],
-  snacks: [{
-    snack: {type: Schema.Types.ObjectId, ref:'Snack'},
-    price: {type: String, required: true}
+  goods: [{
+    name: String,
+    price: {type: Number, required: true},
+    count: Number
   }],
 })
 
