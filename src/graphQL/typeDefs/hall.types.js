@@ -3,16 +3,21 @@ import {buildSchema} from "graphql";
 const hallSchema = buildSchema(`
 
   scalar DateTime
+  
+  enum SeatStatus {
+    VIP
+    STANDARD
+  }
 
   type Seat {
     seatNumber: Int
-    status: String
+    status: SeatStatus
     isBusy: Boolean
   }
   
   input SeatInput {
     seatNumber: Int
-    status: String
+    status: SeatStatus
     isBusy: Boolean 
   }
   

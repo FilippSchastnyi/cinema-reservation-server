@@ -4,6 +4,11 @@ const sessionSchema = buildSchema(`
 
   scalar DateTime
   
+  enum SeatStatus {
+    VIP
+    STANDARD
+  }
+  
   type Booking {
     row: Int
     seats: [Int]
@@ -16,7 +21,7 @@ const sessionSchema = buildSchema(`
   
   type Seat {
     seatNumber: Int
-    status: String
+    status: SeatStatus
     isBusy: Boolean
   }
   
@@ -26,6 +31,7 @@ const sessionSchema = buildSchema(`
   }
 
   type SessionData {
+    hallName: String
     hall: [Row]
     showTime: DateTime
     booking: [Booking]

@@ -39,6 +39,7 @@ class SessionController {
     })
 
     return {
+      hallName: session.hall.name,
       hall: sessionPlan,
       showTime: session.showTime,
       booking: bookingList
