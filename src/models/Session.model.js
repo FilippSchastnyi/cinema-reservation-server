@@ -5,7 +5,7 @@ const sessionSchema = new Schema({
   showTime: {type: Date, require: true},
   booking: [{
     row: {type: Number},
-    seat: {type: Number}
+    seats: [{type: Number}]
   }],
 })
 

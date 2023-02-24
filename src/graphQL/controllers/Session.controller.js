@@ -2,30 +2,47 @@ import SessionModel from "../../models/Session.model.js";
 import HallModel from "../../models/Hall.model.js";
 
 class SessionController {
-  async createSession(_, {input}){
+  async createSession(_, {input}) {
     console.log(input)
     return SessionModel.create(input);
   }
 
-  async updateSession(){
+  async updateSession() {
 
   }
 
-  async getAllSessions(){
+  async getAllSessions() {
 
   }
 
-  async getOneSession(_, {id}){
+  async getOneSession(_, {id}) {
     const session = await SessionModel.findOne({_id: id}).populate("hall", "plan name", HallModel)
-    const hallPlanRows = session.hall.plan
-    const bookedPlaces = session.booking
-    const sessionPlan = hallPlanRows.map((row, index) => {
-      bookedPlaces.forEach(place => {
-        if(place.row === row.rowNumber){
-          console.log(place.row)
-        }
+    const hallPlan = session.hall.plan
+    const bookingList = session.booking
+
+    const sessionPlan = hallPlan.map((hallRow) => {
+      const isRowBooked = bookingList.some(booking => booking.row === hallRow.rowNumber)
+      if (!isRowBooked) return hallRow
+
+      const currentRowHallSeats = hallRow.seats
+      const currentRowBookedSeats = bookingList.find(booking => booking.row === hallRow.rowNumber).seats
+      const currentRowSessionSeats = currentRowHallSeats.map(hallSeat => {
+        const isSeatBooked = currentRowBookedSeats.includes(hallSeat.seatNumber)
+        return isSeatBooked
+          ? {...hallSeat.toObject(), isBusy: true}
+          : hallSeat
       })
+      return {
+        ...hallRow.toObject(),
+        seats: currentRowSessionSeats
+      }
     })
+
+    return {
+      hall: sessionPlan,
+      showTime: session.showTime,
+      booking: bookingList
+    }
   }
 }
 

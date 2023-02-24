@@ -6,12 +6,12 @@ const sessionSchema = buildSchema(`
   
   type Booking {
     row: Int
-    seat: Int
+    seats: [Int]
   }
   
   input BookingInput {
     row: Int
-    seat: Int
+    seats: [Int]
   }
   
   type Seat {
