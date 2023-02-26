@@ -4,6 +4,7 @@ import combinedSchema from "./graphQL/combined.schema.js";
 import {ApolloServer} from "@apollo/server";
 import express from "express";
 import http from 'http';
+import path from "path";
 import {ApolloServerPluginDrainHttpServer} from '@apollo/server/plugin/drainHttpServer';
 import {expressMiddleware} from "@apollo/server/express4";
 import bodyParser from "express";
@@ -33,7 +34,7 @@ const server = new ApolloServer({
    * to be able to get formData format,
    * it's important!`.
    **/
-app.use(graphqlUploadExpress({maxFileSize: 10000000, maxFiles: 10}));
+app.use(graphqlUploadExpress({maxFileSize: 100000000, maxFiles: 100}));
   /**
    * Start the server with our settings`.
    **/
@@ -42,8 +43,18 @@ await server.start();
    * Set up our Express middleware to handle CORS, body parsing,`
    * and our expressMiddleware function.
    **/
+
+const __dirname = path.resolve();
+
+app.use('/img', cors({
+  origin: '*'
+}));
+app.use(express.static(path.resolve(__dirname, 'static')))
+
 app.use('/graphql',
-  cors(),
+  cors({
+    origin: '*'
+  }),
   /**
    * set 50mb body limit
    **/
@@ -57,7 +68,7 @@ app.use('/graphql',
   }),
 );
 
-app.use(express.static('static'))
+app.use(express.static(path.resolve(__dirname, 'static')))
   /**
    * Just a port for develop condition and default one
    **/

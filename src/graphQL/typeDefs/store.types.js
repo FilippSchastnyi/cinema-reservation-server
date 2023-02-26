@@ -1,25 +1,34 @@
 import {buildSchema} from "graphql";
 
 const storeTypes = buildSchema(`
+  scalar Upload
   
+  enum SeatStatus {
+    VIP
+    STANDARD
+  }
+    
   type Ticket {
-    type: String
+    status: SeatStatus
     price: Float
   }
   
   input TicketInput {
-    type: String
+    status: SeatStatus
     price: Float
   }
   
   type GoodsData {
     name: String
+    image: String
     price: Float
     count: Int
   }
   
   input GoodsInput {
+    storeId: ID!
     name: String
+    image: Upload
     price: Float
     count: Int
   }
@@ -43,7 +52,7 @@ const storeTypes = buildSchema(`
   
   type Mutation{
     createStore(input: StoreInput): StoreData
-    updateStore(id: ID!, input: StoreInput): StoreData
+    createGoods(input: GoodsInput): GoodsData
   }
 `)
 

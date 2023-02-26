@@ -1,18 +1,12 @@
 import Utils from "../../utils/Utils.js";
 import FilmModel from "../../models/Film.model.js";
-import fs from "fs"
-import path from "path";
 import CinemaModel from "../../models/Cinema.model.js";
 import GenreModel from "../../models/Genre.model.js";
 import {sortFilmsModule} from "../modules/sort-films.module.js";
 
 class FilmController {
   async createFilm(_, {input}) {
-    const {filename, createReadStream} = await input.image
-    const __dirname = path.resolve();
-    const stream = createReadStream()
-    const pathToSaveImage = path.join(__dirname, `/static/img/films/${filename}`)
-    await stream.pipe(fs.createWriteStream(pathToSaveImage))
+    await Utils.writeFileToStaticFolder(input.image, "/static/img/films")
 
     if (await Utils.doesDocumentExist(FilmModel, {name: input.name})) {
       return null

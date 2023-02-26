@@ -7,7 +7,7 @@ const StoreResolver = {
   },
   Mutation: {
     createStore: StoreController.createStore,
-    updateStore: StoreController.updateStore,
+    createGoods: StoreController.createGoods,
   }
 }
 
