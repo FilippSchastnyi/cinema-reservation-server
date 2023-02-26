@@ -44,13 +44,6 @@ await server.start();
    * and our expressMiddleware function.
    **/
 
-const __dirname = path.resolve();
-
-app.use('/img', cors({
-  origin: '*'
-}));
-app.use(express.static(path.resolve(__dirname, 'static')))
-
 app.use('/graphql',
   cors({
     origin: '*'
@@ -68,6 +61,7 @@ app.use('/graphql',
   }),
 );
 
+const __dirname = path.resolve();
 app.use(express.static(path.resolve(__dirname, 'static')))
   /**
    * Just a port for develop condition and default one
