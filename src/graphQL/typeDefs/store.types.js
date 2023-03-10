@@ -3,21 +3,6 @@ import {buildSchema} from "graphql";
 const storeTypes = buildSchema(`
   scalar Upload
   
-  enum SeatStatus {
-    VIP
-    STANDARD
-  }
-    
-  type Ticket {
-    status: SeatStatus
-    price: Float
-  }
-  
-  input TicketInput {
-    status: SeatStatus
-    price: Float
-  }
-  
   type GoodsData {
     name: String
     image: String
@@ -35,13 +20,11 @@ const storeTypes = buildSchema(`
   
   type StoreData {
     name: String
-    tickets: [Ticket]
     goods: [GoodsData]
   } 
   
   input StoreInput {
     name: String
-    tickets: [TicketInput]
     goods: [GoodsInput]
   } 
   

@@ -21,6 +21,8 @@ import genreTypes from "./typeDefs/genre.types.js";
 import cityTypes from "./typeDefs/city.types.js";
 import sessionTypes from "./typeDefs/session.types.js";
 import hallTypes from "./typeDefs/hall.types.js";
+import ticketTypes from "./typeDefs/ticket.types.js";
+import ticketResolver from "./resolvers/ticket.resolver.js";
 
 const combinedSchema = makeExecutableSchema({
   typeDefs: [
@@ -32,7 +34,8 @@ const combinedSchema = makeExecutableSchema({
     genreTypes,
     cityTypes,
     sessionTypes,
-    hallTypes
+    hallTypes,
+    ticketTypes
   ],
   resolvers: [
     customResolvers,
@@ -44,7 +47,8 @@ const combinedSchema = makeExecutableSchema({
     genreResolver,
     cityResolver,
     sessionResolver,
-    hallResolver
+    hallResolver,
+    ticketResolver
   ],
 });
 

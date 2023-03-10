@@ -33,7 +33,7 @@ const hallSchema = buildSchema(`
   
   type showTime {
     _id: ID
-    startTime: DateTime
+    showTime: DateTime
   }
   
   type hallData {
@@ -43,19 +43,14 @@ const hallSchema = buildSchema(`
     schedule: [showTime]
   }
   
-  type cinemaHall {
-    cinemaName: String,
-    halls: [hallData]
-  }
-  
   input hallInput {
     name: String!
     plan: [RowInput]
-    sessions: [ID]
+    schedule: [ID]
   }
   
   type Query {
-    getAllHalls(cinemaId: ID!): cinemaHall
+    getAllCinemaHalls(cinemaId: ID!): [hallData]
     getOneHall(id: ID!): hallData
   }
   

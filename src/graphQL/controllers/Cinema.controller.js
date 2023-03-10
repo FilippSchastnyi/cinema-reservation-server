@@ -3,6 +3,7 @@ import cinemaModel from "../../models/Cinema.model.js";
 import filmModel from "../../models/Film.model.js";
 import CityModel from "../../models/City.model.js";
 import storeModel from "../../models/Store.model.js";
+import ConstantsService from "../../services/Constants.service.js";
 
 class CinemaController {
   async createCinema(_, {input}){
@@ -33,7 +34,17 @@ class CinemaController {
   }
 
   async getOneCinema(_, input){
-    return CinemaModel.findOne({_id: input.id}).populate({path: "store", model:storeModel})
+    const cinema = await CinemaModel.findOne({_id: input.id}).populate({path: "store", model:storeModel})
+    const cinemaGoods = [...cinema.store.goods]
+    const updatedCinemaGoods = cinemaGoods.map(item=> {
+      return {
+        ...item.toObject(),
+        image: ConstantsService.getImagesURL('goods', item.image)
+      }
+    })
+    cinema.store.goods = updatedCinemaGoods
+    return cinema
+
   }
 }
 

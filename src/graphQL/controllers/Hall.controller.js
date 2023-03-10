@@ -12,33 +12,19 @@ class HallController {
 
   }
 
-  async getAllHalls(_, input) {
+  async getAllCinemaHalls(_, input) {
     const {cinemaId} = input
-    const cinema = await CinemaModel.findOne({_id: cinemaId})
-    const halls = await HallModel.find({_id: {$in: cinema.halls}})
-
-    const processedHalls = []
-    for (let hall of halls) {
-      const sessions = await SessionModel.find({_id: {$in: hall.schedule}})
-      const hallSchedule = sessions.map(session => {
-        return {
-          _id: session._id,
-          startTime: session.showTime
-        }
-      })
-      processedHalls.push({
-        _id: hall._id,
-        name: hall.name,
-        schedule: hallSchedule
-      })
-    }
-    const cinemaName = cinema.name
-
-    return {
-      cinemaName,
-      halls: processedHalls
-
-    }
+    const cinemaHalls = await CinemaModel.findOne({_id: cinemaId}, {halls: 1, _id: 0}).populate({
+      path:'halls',
+      model: HallModel,
+      populate: {
+        path: 'schedule',
+        select: 'showTime',
+        model: SessionModel
+      }
+      }
+    ).lean()
+    return cinemaHalls.halls
   }
 
   async getOneHall(_, input) {

@@ -20,9 +20,11 @@ const sessionSchema = buildSchema(`
   }
   
   type Seat {
+    _id: ID
     seatNumber: Int
     status: SeatStatus
     isBusy: Boolean
+    price: Float
   }
   
   type Row {
@@ -31,8 +33,8 @@ const sessionSchema = buildSchema(`
   }
 
   type SessionData {
-    hallName: String
-    hall: [Row]
+    location: String
+    schema: [Row]
     showTime: DateTime
     booking: [Booking]
   }

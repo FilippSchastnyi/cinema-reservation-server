@@ -35,10 +35,6 @@ class StoreController {
     return newGoods
   }
 
-  async getAllStores() {
-
-  }
-
   async getOneStore() {
 
   }

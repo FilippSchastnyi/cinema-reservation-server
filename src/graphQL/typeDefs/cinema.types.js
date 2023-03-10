@@ -5,15 +5,22 @@ const cinemaSchema = buildSchema(`
   type GenreData {
     _id: ID,
     name: String
-  }  
+  }
+    
+  enum SeatStatus {
+    VIP
+    STANDARD
+  }
   
   type Ticket {
-    type: String
+    status: SeatStatus
     price: Float
   }
   
   type GoodsData {
+    _id: ID
     name: String
+    image: String
     price: Float
     count: Int
   }

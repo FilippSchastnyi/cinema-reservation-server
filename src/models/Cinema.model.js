@@ -6,7 +6,8 @@ const cinemaSchema = new Schema({
   films: [{type: Schema.Types.ObjectId, ref: 'film'}],
   schedule: [{type: Schema.Types.ObjectId, ref: 'session'}],
   store: {type: Schema.Types.ObjectId, ref: 'store'},
-  halls: [{type: Schema.Types.ObjectId, ref: 'halls'}],
+  halls: [{type: Schema.Types.ObjectId, ref: 'hall'}],
+  tickets: {type: Schema.Types.ObjectId, ref: 'ticket'},
 })
 
 export default model('Cinema', cinemaSchema)

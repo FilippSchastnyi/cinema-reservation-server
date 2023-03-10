@@ -3,7 +3,7 @@ import HallController from '../controllers/Hall.controller.js'
 const HallResolver = {
   Query: {
     getOneHall: HallController.getOneHall,
-    getAllHalls: HallController.getAllHalls,
+    getAllCinemaHalls: HallController.getAllCinemaHalls,
   },
   Mutation: {
     createHall: HallController.createHall,

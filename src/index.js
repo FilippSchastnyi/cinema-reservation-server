@@ -61,6 +61,12 @@ app.use('/graphql',
   }),
 );
 
+app.use('/img',
+  cors({
+    origin: '*'
+  })
+);
+
 const __dirname = path.resolve();
 app.use(express.static(path.resolve(__dirname, 'static')))
   /**
